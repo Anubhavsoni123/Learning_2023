@@ -1,37 +1,50 @@
+
 #include <stdio.h>
 
-int main() {
+struct Student {
     int rollNo;
     char name[50];
-    float physicsMarks, mathMarks, chemistryMarks;
-    float totalMarks, percentage;
+    float physicsMarks;
+    float mathMarks;
+    float chemistryMarks;
+};
 
-    printf("Enter the Roll No: ");
-    scanf("%d", &rollNo);
+void readStudentDetails(struct Student* student) {
+    printf("Enter Roll No: ");
+    scanf("%d", &(student->rollNo));
 
-    printf("Enter the Name: ");
-    scanf(" %[^\n]s", name);
+    printf("Enter Name: ");
+    scanf(" %[^\n]s", student->name);
 
-    printf("Enter the Marks of Physics: ");
-    scanf("%f", &physicsMarks);
+    printf("Enter Marks in Physics: ");
+    scanf("%f", &(student->physicsMarks));
 
-    printf("Enter the Marks of Math: ");
-    scanf("%f", &mathMarks);
+    printf("Enter Marks in Math: ");
+    scanf("%f", &(student->mathMarks));
 
-    printf("Enter the Marks of Chemistry: ");
-    scanf("%f", &chemistryMarks);
+    printf("Enter Marks in Chemistry: ");
+    scanf("%f", &(student->chemistryMarks));
+}
 
-    // Calculate the total marks and percentage
-    totalMarks = physicsMarks + mathMarks + chemistryMarks;
-    percentage = (totalMarks / 300) * 100;
+void calculateStudentSummary(struct Student student) {
+    float totalMarks = student.physicsMarks + student.mathMarks + student.chemistryMarks;
+    float percentage = (totalMarks / 300) * 100;
 
-    printf("Roll No: %d\n", rollNo);
-    printf("Name: %s\n", name);
-    printf("Physics Marks: %.2f\n", physicsMarks);
-    printf("Math Marks: %.2f\n", mathMarks);
-    printf("Chemistry Marks: %.2f\n", chemistryMarks);
+    printf("\n------ Student Summary ------\n");
+    printf("Roll No: %d\n", student.rollNo);
+    printf("Name: %s\n", student.name);
+    printf("Marks in Physics: %.2f\n", student.physicsMarks);
+    printf("Marks in Math: %.2f\n", student.mathMarks);
+    printf("Marks in Chemistry: %.2f\n", student.chemistryMarks);
     printf("Total Marks: %.2f\n", totalMarks);
     printf("Percentage: %.2f%%\n", percentage);
+}
+
+int main() {
+    struct Student student;
+
+    readStudentDetails(&student);
+    calculateStudentSummary(student);
 
     return 0;
 }
